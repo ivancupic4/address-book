@@ -1,0 +1,66 @@
+GET
+http://localhost:55071/api/Contact/get/1
+
+GET
+http://localhost:55071/api/Contact/getList
+Header: "Content-Type": "application/json"
+Body: 
+{
+    "PagingDTO": {
+        "PageNumber": 2,
+        "PageSize": 10
+    }
+}
+Body: 
+{
+    "Name": "Maria"
+}
+Body:
+{
+    "Telephone": "1234567890"
+}
+
+POST
+http://localhost:55071/api/Contact/insert
+Header: "Content-Type": "application/json"
+{
+    "Name": "Ivan",
+    "BirthDate": "1994-09-01",
+    "Address": "Test Address 1",
+    "TelephoneDTOList": [
+        {
+            "Number": "1234567891"
+        },
+        {
+            "Number": "1234567892"
+        },
+        {
+            "Number": "1234567893"
+        }
+    ]
+}
+
+PUT
+http://localhost:55071/api/Contact/update
+Header: "Content-Type": "application/json"
+Body: 
+{
+    "Id": 5,
+    "Name": "Ivan",
+    "BirthDate": "1994-09-01",
+    "Address": "Test Address 4",
+    "TelephoneDTOList": [
+        {
+            "Number": "1234567891"
+        },
+        {
+            "Number": "1234567894"
+        },
+        {
+            "Number": "1234567895"
+        }
+    ]
+}
+
+DELETE
+http://localhost:55071/api/Contact/delete/2
