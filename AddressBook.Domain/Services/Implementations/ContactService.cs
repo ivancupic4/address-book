@@ -23,37 +23,113 @@ namespace AddressBook.Domain.Services
             this._contactDbMapper = contactDbMapper;
         }
 
-        public ContactDTO GetContact(int contactId)
+        public ItemDTO<ContactDTO> GetContact(int contactId)
         {
-            var contact = this._contactRepository.GetContact(contactId);
-            var contactDTO = this._contactDTOBuilder.MapContactToContactDTO(contact);
+            var result = new ItemDTO<ContactDTO>();
 
-            return contactDTO;
+            try
+            {
+                var contact = this._contactRepository.GetContact(contactId);
+                if (contact == null)
+                {
+                    result.NotificationDTO.AddErrorMessage($"The contact with Id={contactId} does not exist");
+                    return result;
+                }
+
+                result.Item = this._contactDTOBuilder.MapContactToContactDTO(contact);
+            }
+            catch (Exception ex)
+            {
+                result.NotificationDTO.AddErrorMessage($"Error {ex.Message}");
+            }
+
+            return result;
         }
 
-        public List<ContactDTO> GetContacts(ContactSearchDTO contactSearchDTO)
+        public ItemDTO<List<ContactDTO>> GetContacts(ContactSearchDTO contactSearchDTO)
         {
-            var contacts = this._contactRepository.GetContacts(contactSearchDTO);
-            var contactDTOList = this._contactDTOBuilder.MapContactsToContactDTOList(contacts);
+            var result = new ItemDTO<List<ContactDTO>>();
 
-            return contactDTOList;
+            try
+            {
+                var contacts = this._contactRepository.GetContacts(contactSearchDTO);
+                result.Item = this._contactDTOBuilder.MapContactsToContactDTOList(contacts);
+            }
+            catch (Exception ex)
+            {
+                result.NotificationDTO.AddErrorMessage($"Error {ex.Message}");
+            }
+
+            return result;
         }
 
-        public void InsertContact(ContactDTO contactDTO)
+        public ItemDTO<int> InsertContact(ContactDTO contactDTO)
         {
-            var contact = this._contactDbMapper.MapContactDTOToContact(contactDTO);
-            this._contactRepository.InsertContact(contact);
+            var result = new ItemDTO<int>();
+
+            try
+            {
+                var contact = this._contactDbMapper.MapContactDTOToContact(contactDTO);
+                this._contactRepository.InsertContact(contact);
+
+                result.Item = 1;
+                result.NotificationDTO.AddSuccessMessage("Contact saved successfully");
+            }
+            catch (Exception ex)
+            {
+                result.NotificationDTO.AddErrorMessage($"Error {ex.Message}");
+            }
+
+            return result;
         }
 
-        public void UpdateContact(ContactDTO contactDTO)
+        public ItemDTO<int> UpdateContact(ContactDTO contactDTO)
         {
-            var contact = this._contactDbMapper.MapContactDTOToContact(contactDTO);
-            this._contactRepository.UpdateContact(contact);
+            var result = new ItemDTO<int>();
+
+            try
+            {
+                var contact = this._contactDbMapper.MapContactDTOToContact(contactDTO);
+                bool success = this._contactRepository.UpdateContact(contact);
+                if (!success)
+                {
+                    result.NotificationDTO.AddErrorMessage($"The contact with Id={contactDTO.Id} does not exist");
+                    return result;
+                }
+
+                result.Item = 1;
+                result.NotificationDTO.AddSuccessMessage($"Contact {contactDTO.Name} updated successfully");
+            }
+            catch (Exception ex)
+            {
+                result.NotificationDTO.AddErrorMessage($"Error {ex.Message}");
+            }
+
+            return result;
         }
 
-        public void DeleteContact(int contactId)
+        public ItemDTO<int> DeleteContact(int contactId)
         {
-            this._contactRepository.DeleteContact(contactId);
+            var result = new ItemDTO<int>();
+
+            try
+            {
+                bool success = this._contactRepository.DeleteContact(contactId);
+                if (!success)
+                {
+                    result.NotificationDTO.AddErrorMessage($"The contact with Id={contactId} does not exist");
+                    return result;
+                }
+
+                result.Item = 1;
+                result.NotificationDTO.AddSuccessMessage($"Contact deleted successfully");
+            }
+            catch (Exception ex)
+            {
+                result.NotificationDTO.AddErrorMessage($"Error {ex.Message}");
+            }
+
+            return result;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace AddressBook.DAL.Repositories
         public Contact GetContact(int contactId);
         public List<Contact> GetContacts(ContactSearchDTO contactSearchDTO);
         public void InsertContact(Contact contact);
-        public void UpdateContact(Contact contact);
-        public void DeleteContact(int contactId);
+        public bool UpdateContact(Contact contact);
+        public bool DeleteContact(int contactId);
     }
 }

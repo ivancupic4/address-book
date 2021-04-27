@@ -7,10 +7,10 @@ namespace AddressBook.Domain.Services
 {
     public interface IContactService
     {
-        public ContactDTO GetContact(int contactId);
-        public List<ContactDTO> GetContacts(ContactSearchDTO contactSearchDTO);
-        public void InsertContact(ContactDTO contactDTO);
-        public void UpdateContact(ContactDTO contactDTO);
-        public void DeleteContact(int contactId);
+        public ItemDTO<ContactDTO> GetContact(int contactId);
+        public ItemDTO<List<ContactDTO>> GetContacts(ContactSearchDTO contactSearchDTO);
+        public ItemDTO<int> InsertContact(ContactDTO contactDTO);
+        public ItemDTO<int> UpdateContact(ContactDTO contactDTO);
+        public ItemDTO<int> DeleteContact(int contactId);
     }
 }

@@ -24,46 +24,52 @@ namespace AddressBook.Web.Controllers
 
         [HttpGet]
         [Route("get/{contactId:int}")]
-        public async Task<ContactDTO> Get(int contactId)
+        public async Task<ItemDTO<ContactDTO>> Get(int contactId)
         {
-            var contactDTO = this._contactService.GetContact(contactId);
-            await this._contactHub.SendGetMessage(contactDTO.Name);
+            var result = this._contactService.GetContact(contactId);
+            await this._contactHub.SendGetMessage(result.Item.Name);
 
-            return contactDTO;
+            return result;
         }
 
         [HttpGet]
         [Route("getList")]
-        public async Task<List<ContactDTO>> Get([FromBody] ContactSearchDTO contactSearchDTO)
+        public async Task<ItemDTO<List<ContactDTO>>> Get([FromBody] ContactSearchDTO contactSearchDTO)
         {
-            var contactDTOList = this._contactService.GetContacts(contactSearchDTO);
-            await this._contactHub.SendGetListMessage(contactDTOList.Count);
+            var result = this._contactService.GetContacts(contactSearchDTO);
+            await this._contactHub.SendGetListMessage(result.Item.Count);
 
-            return contactDTOList;
+            return result;
         }
 
         [HttpPost]
         [Route("insert")]
-        public async void Post([FromBody] ContactDTO contactDTO)
+        public async Task<ItemDTO<int>> Post([FromBody] ContactDTO contactDTO)
         {
-            this._contactService.InsertContact(contactDTO);
+            var result = this._contactService.InsertContact(contactDTO);
             await this._contactHub.SendInsertMessage(contactDTO.Name);
+
+            return result;
         }
 
         [HttpPut]
         [Route("update")]
-        public async void Put([FromBody] ContactDTO contactDTO)
+        public async Task<ItemDTO<int>> Put([FromBody] ContactDTO contactDTO)
         {
-            this._contactService.UpdateContact(contactDTO);
+            var result = this._contactService.UpdateContact(contactDTO);
             await this._contactHub.SendUpdateMessage(contactDTO.Name);
+
+            return result;
         }
 
         [HttpDelete]
         [Route("delete/{contactId:int}")]
-        public async void Delete(int contactId)
+        public async Task<ItemDTO<int>> Delete(int contactId)
         {
-            this._contactService.DeleteContact(contactId);
+            var result = this._contactService.DeleteContact(contactId);
             await this._contactHub.SendDeleteMessage(contactId);
+
+            return result;
         }
     }
 }

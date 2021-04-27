@@ -17,31 +17,31 @@ namespace AddressBook.Web.Hubs
 
         public async Task SendGetMessage(string contactName)
         {
-            string message = $"The contact {contactName} successfully loaded!";
+            string message = $"Loading contact {contactName}";
             await this._context.Clients.All.SendAsync("ReceiveMessage", message);
         }
 
         public async Task SendGetListMessage(int contactCount)
         {
-            string message = $"Contact list of {contactCount} items successfully loaded!";
+            string message = $"Loading contact list of {contactCount} items";
             await this._context.Clients.All.SendAsync("ReceiveMessage", message);
         }
 
         public async Task SendInsertMessage(string contactName)
         {
-            string message = $"The contact {contactName} successfully inserted!";
+            string message = $"Inserting contact {contactName}";
             await this._context.Clients.All.SendAsync("ReceiveMessage", message);
         }
 
         public async Task SendUpdateMessage(string contactName)
         {
-            string message = $"The contact {contactName} successfully updated!";
+            string message = $"Updating contact {contactName}";
             await this._context.Clients.All.SendAsync("ReceiveMessage", message);
         }
 
         public async Task SendDeleteMessage(int contactId)
         {
-            string message = $"The contact with Id={contactId} successfully deleted!";
+            string message = $"Deleting contact with Id={contactId}";
             await this._context.Clients.All.SendAsync("ReceiveMessage", message);
         }
     }

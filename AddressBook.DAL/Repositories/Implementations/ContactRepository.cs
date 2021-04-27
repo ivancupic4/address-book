@@ -22,7 +22,7 @@ namespace AddressBook.DAL.Repositories
             var contact = this._addressBookContext.Contacts
                 .Include(x => x.Telephones)
                 .Where(x => x.Id == contactId)
-                .Single();
+                .SingleOrDefault();
 
             return contact;
         }
@@ -52,9 +52,14 @@ namespace AddressBook.DAL.Repositories
             this._addressBookContext.SaveChanges();
         }
 
-        public void UpdateContact(Contact contact)
+        public bool UpdateContact(Contact contact)
         {
             var dbContact = this._addressBookContext.Contacts.Find(contact.Id);
+            if (dbContact == null)
+            {
+                return false;
+            }
+
             dbContact.Name = contact.Name;
             dbContact.Address = contact.Address;
             dbContact.BirthDate = contact.BirthDate;
@@ -73,17 +78,25 @@ namespace AddressBook.DAL.Repositories
             this._addressBookContext.Telephones.AddRange(telephonesForInsert);
 
             this._addressBookContext.SaveChanges();
+
+            return true;
         }
 
-        public void DeleteContact(int contactId)
+        public bool DeleteContact(int contactId)
         {
             var dbTelephones = this._addressBookContext.Telephones.Where(x => x.ContactId == contactId);
             this._addressBookContext.Telephones.RemoveRange(dbTelephones);
 
             var dbContact = this._addressBookContext.Contacts.Find(contactId);
-            this._addressBookContext.Contacts.Remove(dbContact);
+            if (dbContact == null)
+            {
+                return false;
+            }
 
+            this._addressBookContext.Contacts.Remove(dbContact);
             this._addressBookContext.SaveChanges();
+
+            return true;
         }
     }
 }
