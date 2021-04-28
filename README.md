@@ -5,7 +5,7 @@ This project provides functionality of an address book, with contacts and their 
 The notification for every controller action is sent to connected users via SignalR hub. 
 
 ## Postman requests testing
-Postman requests and appropriate headers and bodies of a request are listed in `SolutionItems/postman_requests_test.txt` file. 
+Postman requests with appropriate header and body values of the requests are listed in `SolutionItems/postman_requests_test.txt` file. 
 
 ## PostgreSQL database
 This project is done with database-first approach. 
