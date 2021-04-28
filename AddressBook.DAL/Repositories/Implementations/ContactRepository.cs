@@ -35,7 +35,8 @@ namespace AddressBook.DAL.Repositories
                 .Where(x => contactSearchDTO.Address == null || x.Address == contactSearchDTO.Address)
                 .Where(x => contactSearchDTO.BirthDate == null || x.BirthDate == contactSearchDTO.BirthDate)
                 .Where(x => contactSearchDTO.Telephone == null ||
-                            x.Telephones.Any(y => y.Number == contactSearchDTO.Telephone));
+                            x.Telephones.Any(y => y.Number == contactSearchDTO.Telephone))
+                .OrderBy(x => x.Id).AsQueryable();
 
             if (contactSearchDTO.PagingDTO != null)
             {

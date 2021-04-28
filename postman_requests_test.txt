@@ -17,7 +17,7 @@ Body:
 }
 Body:
 {
-    "Telephone": "1234567890"
+    "Telephone": "3213878962"
 }
 
 POST
@@ -45,9 +45,9 @@ http://localhost:55071/api/Contact/update
 Header: "Content-Type": "application/json"
 Body: 
 {
-    "Id": 5,
-    "Name": "Ivan",
-    "BirthDate": "1994-09-01",
+    "Id": 51,
+    "Name": "Ivan Cupic",
+    "BirthDate": "1994-09-02",
     "Address": "Test Address 4",
     "TelephoneDTOList": [
         {
@@ -63,4 +63,4 @@ Body:
 }
 
 DELETE
-http://localhost:55071/api/Contact/delete/2
+http://localhost:55071/api/Contact/delete/51
