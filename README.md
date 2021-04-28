@@ -5,13 +5,11 @@ This project provides functionality of an address book, with contacts and their 
 The notification for every controller action is sent to connected users via SignalR hub. 
 
 ## PostgreSQL database
-This project is done with database-first approach. 
-
-PostgreSQL database table creation script file is located in `SolutionItems/address_book_create_table_data.sql` file. 
-
-The rest of the database data is located in `appsettings.json` file. 
+This project is done with database-first approach. PostgreSQL database table creation script file is located in `SolutionItems/address_book_create_table_data.sql` file. 
 
 Reverse engineering model creation is done with EntityFramework scaffolding. The scrips needed to generate the model are located in `dotnet_packages_install.txt` file. 
+
+The rest of the database data is located in `appsettings.json` file. 
 
 ## SignalR
 When started, application opens a browser on the starting page. Upon making a request, the relevant information will appear on the page in real-time. 
