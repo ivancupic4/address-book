@@ -15,7 +15,6 @@ namespace AddressBook.Common.DTO
         public string Name { get; set; }
         public DateTime? BirthDate { get; set; }
         public string Address { get; set; }
-
         public List<TelephoneDTO> TelephoneDTOList { get; set; }
-}
+    }
 }
