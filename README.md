@@ -22,4 +22,4 @@ NuGet packages used in this solution:
 
 
 ## Postman requests
-Postman requests with appropriate header and body values of the requests are listed in `SolutionItems/postman_requests_test.txt` file. 
+Postman requests with appropriate header and body values of the requests for testing are listed in `SolutionItems/postman_requests_test.txt` file. 
