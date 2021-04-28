@@ -4,9 +4,6 @@ AddressBook .NET Core Web API project with SignalR and PostgreSQL database.
 This project provides functionality of an address book, with contacts and their telephone numbers. 
 The notification for every controller action is sent to connected users via SignalR hub. 
 
-## Postman requests testing
-Postman requests with appropriate header and body values of the requests are listed in `SolutionItems/postman_requests_test.txt` file. 
-
 ## PostgreSQL database
 This project is done with database-first approach. 
 
@@ -22,3 +19,7 @@ NuGet packages used in this solution:
 - Microsoft.NETCore.App
 - Npgsql.EntityFrameworkCore.PostgreSQL
 - Npgsql.EntityFrameworkCore.PostgreSQL.Design
+
+
+## Postman requests
+Postman requests with appropriate header and body values of the requests are listed in `SolutionItems/postman_requests_test.txt` file. 
