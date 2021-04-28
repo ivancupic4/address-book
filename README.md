@@ -11,7 +11,7 @@ PostgreSQL database table creation script file is located in `SolutionItems/addr
 
 The rest of the database data is located in `appsettings.json` file. 
 
-Reverse engineering model creation is done via EntityFramework scaffolding. The scrips needed to generate the model are located in `dotnet_packages_install.txt` file. 
+Reverse engineering model creation is done with EntityFramework scaffolding. The scrips needed to generate the model are located in `dotnet_packages_install.txt` file. 
 
 ## NuGet packages
 NuGet packages used in this solution: 
