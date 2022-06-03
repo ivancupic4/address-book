@@ -10,29 +10,24 @@ namespace AddressBook.Domain.Mappers
     {
         public Contact MapContactDTOToContact(ContactDTO contactDTO)
         {
-            var contact = new Contact()
+            return new Contact()
             {
                 Id = contactDTO.Id,
                 Name = contactDTO.Name,
                 Address = contactDTO.Address,
-                BirthDate = contactDTO.BirthDate
+                BirthDate = contactDTO.BirthDate,
+                Telephones = MapTelephoneDTOListToTelephoneList(contactDTO.TelephoneDTOList, contactDTO.Id)
             };
-
-            contact.Telephones = MapTelephoneDTOListToTelephoneList(contactDTO.TelephoneDTOList, contactDTO.Id);
-
-            return contact;
         }
 
         public List<Telephone> MapTelephoneDTOListToTelephoneList(List<TelephoneDTO> telephoneDTOList, int contactId)
         {
             var telephones = new List<Telephone>();
-
             foreach (var telephoneDTO in telephoneDTOList)
             {
                 var telephone = MapTelephoneDTOToTelephone(telephoneDTO, contactId);
                 telephones.Add(telephone);
             }
-
             return telephones;
         }
 

@@ -19,12 +19,10 @@ namespace AddressBook.DAL.Repositories
 
         public Contact GetContact(int contactId)
         {
-            var contact = this._addressBookContext.Contacts
+            return this._addressBookContext.Contacts
                 .Include(x => x.Telephones)
                 .Where(x => x.Id == contactId)
                 .SingleOrDefault();
-
-            return contact;
         }
 
         public List<Contact> GetContacts(ContactSearchDTO contactSearchDTO)
@@ -34,8 +32,7 @@ namespace AddressBook.DAL.Repositories
                 .Where(x => contactSearchDTO.Name == null || x.Name == contactSearchDTO.Name)
                 .Where(x => contactSearchDTO.Address == null || x.Address == contactSearchDTO.Address)
                 .Where(x => contactSearchDTO.BirthDate == null || x.BirthDate == contactSearchDTO.BirthDate)
-                .Where(x => contactSearchDTO.Telephone == null ||
-                            x.Telephones.Any(y => y.Number == contactSearchDTO.Telephone))
+                .Where(x => contactSearchDTO.Telephone == null || x.Telephones.Any(y => y.Number == contactSearchDTO.Telephone))
                 .OrderBy(x => x.Id).AsQueryable();
 
             if (contactSearchDTO.PagingDTO != null)
@@ -57,9 +54,7 @@ namespace AddressBook.DAL.Repositories
         {
             var dbContact = this._addressBookContext.Contacts.Find(contact.Id);
             if (dbContact == null)
-            {
                 return false;
-            }
 
             dbContact.Name = contact.Name;
             dbContact.Address = contact.Address;
@@ -79,7 +74,6 @@ namespace AddressBook.DAL.Repositories
             this._addressBookContext.Telephones.AddRange(telephonesForInsert);
 
             this._addressBookContext.SaveChanges();
-
             return true;
         }
 
@@ -90,13 +84,10 @@ namespace AddressBook.DAL.Repositories
 
             var dbContact = this._addressBookContext.Contacts.Find(contactId);
             if (dbContact == null)
-            {
                 return false;
-            }
 
             this._addressBookContext.Contacts.Remove(dbContact);
             this._addressBookContext.SaveChanges();
-
             return true;
         }
     }

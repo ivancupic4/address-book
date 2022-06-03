@@ -28,7 +28,6 @@ namespace AddressBook.Web.Controllers
         {
             var result = this._contactService.GetContact(contactId);
             await this._contactHub.SendGetMessage(result.Item.Name);
-
             return result;
         }
 
@@ -38,7 +37,6 @@ namespace AddressBook.Web.Controllers
         {
             var result = this._contactService.GetContacts(contactSearchDTO);
             await this._contactHub.SendGetListMessage(result.Item.Count);
-
             return result;
         }
 
@@ -48,7 +46,6 @@ namespace AddressBook.Web.Controllers
         {
             var result = this._contactService.InsertContact(contactDTO);
             await this._contactHub.SendInsertMessage(contactDTO.Name);
-
             return result;
         }
 
@@ -58,7 +55,6 @@ namespace AddressBook.Web.Controllers
         {
             var result = this._contactService.UpdateContact(contactDTO);
             await this._contactHub.SendUpdateMessage(contactDTO.Name);
-
             return result;
         }
 
@@ -68,7 +64,6 @@ namespace AddressBook.Web.Controllers
         {
             var result = this._contactService.DeleteContact(contactId);
             await this._contactHub.SendDeleteMessage(contactId);
-
             return result;
         }
     }

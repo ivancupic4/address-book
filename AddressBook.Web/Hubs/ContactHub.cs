@@ -16,33 +16,18 @@ namespace AddressBook.Web.Hubs
         }
 
         public async Task SendGetMessage(string contactName)
-        {
-            string message = $"Loading contact {contactName}";
-            await this._context.Clients.All.SendAsync("ReceiveMessage", message);
-        }
+            => await this._context.Clients.All.SendAsync("ReceiveMessage", $"Loading contact {contactName}");
 
         public async Task SendGetListMessage(int contactCount)
-        {
-            string message = $"Loading contact list of {contactCount} items";
-            await this._context.Clients.All.SendAsync("ReceiveMessage", message);
-        }
+            => await this._context.Clients.All.SendAsync("ReceiveMessage", $"Loading contact list of {contactCount} items");
 
         public async Task SendInsertMessage(string contactName)
-        {
-            string message = $"Inserting contact {contactName}";
-            await this._context.Clients.All.SendAsync("ReceiveMessage", message);
-        }
+            => await this._context.Clients.All.SendAsync("ReceiveMessage", $"Inserting contact {contactName}");
 
         public async Task SendUpdateMessage(string contactName)
-        {
-            string message = $"Updating contact {contactName}";
-            await this._context.Clients.All.SendAsync("ReceiveMessage", message);
-        }
+            => await this._context.Clients.All.SendAsync("ReceiveMessage", $"Updating contact {contactName}");
 
         public async Task SendDeleteMessage(int contactId)
-        {
-            string message = $"Deleting contact with Id={contactId}";
-            await this._context.Clients.All.SendAsync("ReceiveMessage", message);
-        }
+            => await this._context.Clients.All.SendAsync("ReceiveMessage", $"Deleting contact with Id={contactId}");
     }
 }

@@ -20,35 +20,20 @@ namespace AddressBook.Common.DTO
         }
 
         public void AddErrorMessage(string message)
-        {
-            Errors.Add(message);
-        }
-
+            => Errors.Add(message);
+        
         public void AddSuccessMessage(string message)
-        {
-            Success.Add(message);
-        }
+            => Success.Add(message);
 
         public void AddWarningMessage(string message)
-        {
-            Warnings.Add(message);
-        }
+            => Warnings.Add(message);
 
         public void AddInfoMessage(string message)
-        {
-            Infos.Add(message);
-        }
+            => Infos.Add(message);
 
         public bool HasErrors
         {
-            get
-            {
-                return Errors.Any();
-            }
-            set
-            {
-
-            }
+            get => Errors.Any();
         }
     }
 }

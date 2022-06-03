@@ -35,7 +35,6 @@ namespace AddressBook.Domain.Services
                     result.NotificationDTO.AddErrorMessage($"The contact with Id={contactId} does not exist");
                     return result;
                 }
-
                 result.Item = this._contactDTOBuilder.MapContactToContactDTO(contact);
             }
             catch (Exception ex)
@@ -110,13 +109,9 @@ namespace AddressBook.Domain.Services
             catch (Exception ex)
             {
                 if (ex.InnerException != null && ex.InnerException.Message.Contains("no_duplicate_contact"))
-                {
                     result.NotificationDTO.AddErrorMessage("Contact must have unique name and address properties");
-                }
                 else
-                {
                     result.NotificationDTO.AddErrorMessage($"Error {ex.Message}");
-                }
             }
 
             return result;

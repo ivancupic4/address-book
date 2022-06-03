@@ -11,41 +11,32 @@ namespace AddressBook.Domain.Builders
         public List<ContactDTO> MapContactsToContactDTOList(List<Contact> contacts)
         {
             var contactDTOList = new List<ContactDTO>();
-
             foreach (var contact in contacts)
             {
-                var contactDTO = MapContactToContactDTO(contact);
-                contactDTOList.Add(contactDTO);
+                contactDTOList.Add(MapContactToContactDTO(contact));
             }
-
             return contactDTOList;
         }
 
         public ContactDTO MapContactToContactDTO(Contact contact)
         {
-            var contactDTO = new ContactDTO()
+            return new ContactDTO()
             {
                 Id = contact.Id,
                 Name = contact.Name,
                 Address = contact.Address,
-                BirthDate = contact.BirthDate
+                BirthDate = contact.BirthDate,
+                TelephoneDTOList = MapTelephonesToTelephoneDTOList(contact.Telephones)
             };
-
-            contactDTO.TelephoneDTOList = MapTelephonesToTelephoneDTOList(contact.Telephones);
-
-            return contactDTO;
         }
 
         public List<TelephoneDTO> MapTelephonesToTelephoneDTOList(ICollection<Telephone> telephones)
         {
             var telephoneDTOList = new List<TelephoneDTO>();
-
             foreach (var telephone in telephones)
             {
-                var telephoneDTO = MapTelephoneToTelephoneDTO(telephone);
-                telephoneDTOList.Add(telephoneDTO);
+                telephoneDTOList.Add(MapTelephoneToTelephoneDTO(telephone));
             }
-
             return telephoneDTOList;
         }
 
